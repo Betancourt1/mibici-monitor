@@ -1,0 +1,19 @@
+[Unit]
+Description=MiBici GBFS collector
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=mibici
+Group=mibici
+WorkingDirectory=/opt/mibici-monitor
+EnvironmentFile=/etc/mibici-collector.env
+ExecStart=/opt/mibici-monitor/.venv/bin/python /opt/mibici-monitor/collector.py
+Restart=always
+RestartSec=10
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
